@@ -77,12 +77,6 @@ body {
   cursor: not-allowed;
 }
 
-.hero .burn-address {
-  margin-top: 20px;
-  font-size: 1em;
-  color: #FF4500;
-}
-
 .hero .wallet-info {
   margin-top: 10px;
   color: #FFD700;

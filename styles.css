@@ -10,7 +10,88 @@ body {
 }
 
 /* Retro Animated Grid Background */
+.grid-background {/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', sans-serif;
+  background: black;
+  color: #00FF00;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* Retro Animated Grid Background */
 .grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
+              repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
+  animation: gridScroll 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes gridScroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 20px 20px;
+  }
+}
+
+/* Glowing Headers */
+.glow-header {
+  text-shadow: 0 0 20px #FF4500, 0 0 40px #FF4500, 0 0 60px #FF4500;
+  font-size: 2em;
+}
+
+/* Information Section */
+.scroll-section {
+  padding: 50px 20px;
+  background: #111;
+}
+
+.scroll-item {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  background: #222;
+  border: 2px solid #FF4500;
+  box-shadow: 0 0 10px #00FF00;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glowing Border for Bottom Sections */
+.glowing-border {
+  border: 2px solid #FF4500;
+  box-shadow: 0 0 20px #FF4500, 0 0 40px #FF4500, 0 0 60px #FF4500;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.glowing-border:hover {
+  box-shadow: 0 0 40px #FF5733, 0 0 80px #FF5733, 0 0 120px #FF5733;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 10px;
+  background: black;
+  color: white;
+  font-size: 0.8em;
+}
+
   position: fixed;
   top: 0;
   left: 0;

@@ -2,7 +2,7 @@
 document.getElementById("burnButton").addEventListener("click", async () => {
   const burnAmount = 69420; // Amount to burn
   const burnAddress = "11111111111111111111111111111111"; // Solana burn address
-  const tokenMintAddress = "GACpABn18xqiSJbD9ZEyArJDT9RHRMUut5nK9Z9Spump"; // Token mint address
+  const tokenMintAddress = "GACpABn18xqiSJbD9ZEyArJDT9RHRMUut5nK9Z9Spump"; // Your token mint address
 
   const provider = window.solana;
   if (!provider || !provider.isPhantom) {
@@ -12,23 +12,19 @@ document.getElementById("burnButton").addEventListener("click", async () => {
   }
 
   try {
-    // Connect to Phantom Wallet
     await provider.connect();
     const publicKey = provider.publicKey;
 
-    // Confirm burn action
     const confirmation = confirm(
       `You are about to burn ${burnAmount} tokens to the Solana burn address. Do you wish to proceed?`
     );
     if (!confirmation) return;
 
-    // Create connection to Solana blockchain
     const connection = new solanaWeb3.Connection(
       solanaWeb3.clusterApiUrl("mainnet-beta"),
       "confirmed"
     );
 
-    // Fetch token accounts owned by the connected wallet for the specified token mint
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
       mint: new solanaWeb3.PublicKey(tokenMintAddress),
     });
@@ -39,8 +35,6 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     }
 
     const tokenAccount = tokenAccounts.value[0].pubkey;
-
-    // Fetch balance of the token account
     const balanceResponse = await connection.getTokenAccountBalance(tokenAccount);
     const tokenBalance = parseInt(balanceResponse.value.amount);
 
@@ -49,7 +43,6 @@ document.getElementById("burnButton").addEventListener("click", async () => {
       return;
     }
 
-    // Create a transaction to burn tokens
     const transaction = new solanaWeb3.Transaction().add(
       splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
@@ -61,11 +54,9 @@ document.getElementById("burnButton").addEventListener("click", async () => {
       )
     );
 
-    // Send transaction
     const { signature } = await provider.signAndSendTransaction(transaction);
     alert(`Transaction sent! Signature: ${signature}`);
 
-    // Confirm the transaction
     const confirmationStatus = await connection.confirmTransaction(signature, "confirmed");
 
     if (confirmationStatus.value.err) {

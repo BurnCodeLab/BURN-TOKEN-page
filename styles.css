@@ -1,0 +1,99 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', sans-serif;
+  background: black;
+  color: #00FF00;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* Retro Animated Grid Background */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
+              repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
+  animation: gridScroll 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes gridScroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 20px 20px;
+  }
+}
+
+/* Glowing Text */
+.glow-text {
+  text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500, 0 0 30px #FF4500;
+}
+
+/* Hero Section */
+.hero {
+  padding: 100px 20px;
+  color: white;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 4em;
+}
+
+.hero .slogan {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.hero .connect-button,
+.hero .burn-button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background: linear-gradient(45deg, #FF4500, #FF5733);
+  border: 2px solid #00FF00;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px #FF4500, inset 0 0 8px #00FF00;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hero .connect-button:hover,
+.hero .burn-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #FF4500, inset 0 0 12px #00FF00;
+}
+
+.hero .burn-button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.hero .burn-address {
+  margin-top: 20px;
+  font-size: 1em;
+  color: #FF4500;
+}
+
+.hero .wallet-info {
+  margin-top: 10px;
+  color: #FFD700;
+  font-size: 1em;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 10px;
+  background: black;
+  color: white;
+  font-size: 0.8em;
+}

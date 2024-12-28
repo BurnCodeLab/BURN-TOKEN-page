@@ -10,6 +10,149 @@ body {
 }
 
 /* Retro Animated Grid Background */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
+              repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
+  animation: gridScroll 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes gridScroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 20px 20px;
+  }
+}
+
+/* Glowing Text */
+.glow-text {
+  text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500, 0 0 30px #FF4500;
+  color: #FF5733;
+}
+
+/* Hero Section */
+.hero {
+  padding: 100px 20px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(180deg, #111, #222);
+  border-bottom: 2px solid #FF4500;
+  box-shadow: 0 0 20px #FF4500;
+}
+
+.hero h1 {
+  font-size: 4em;
+}
+
+.hero .slogan {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #FFD700;
+}
+
+.hero .burn-button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background: linear-gradient(45deg, #FF4500, #FF5733);
+  border: 2px solid #00FF00;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px #FF4500, inset 0 0 8px #00FF00;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+.hero .burn-button:hover {
+  transform: scale(1.1);
+  background: linear-gradient(45deg, #FF5733, #FF4500);
+  box-shadow: 0 0 30px #FF4500, inset 0 0 12px #00FF00;
+}
+
+.hero .burn-address {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #FF4500;
+  font-weight: bold;
+}
+
+/* Scrolling Section */
+.scroll-section {
+  padding: 50px 20px;
+  background: linear-gradient(180deg, #222, #111);
+}
+
+.scroll-item {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  background: #333;
+  border: 2px solid #FF4500;
+  box-shadow: 0 0 20px #00FF00;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.5s ease-in-out;
+}
+
+.scroll-item.active {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 0 40px #FF4500;
+}
+
+.scroll-item h2 {
+  font-size: 2em;
+  color: #FFD700;
+  text-shadow: 0 0 10px #FF4500;
+}
+
+.scroll-item p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #FFFFFF;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 10px;
+  background: black;
+  color: white;
+  font-size: 0.8em;
+  border-top: 2px solid #FF4500;
+  box-shadow: 0 -10px 20px #FF4500;
+}
+
+footer a {
+  color: #FF4500;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #FF5733;
+  text-shadow: 0 0 10px #FF4500;
+}
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', sans-serif;
+  background: black;
+  color: #00FF00;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* Retro Animated Grid Background */
 .grid-background {/* General Reset */
 body {
   margin: 0;

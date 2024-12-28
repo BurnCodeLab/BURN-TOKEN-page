@@ -75,3 +75,4 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     alert(`Error during burn: ${error.message}`);
   }
 });
+

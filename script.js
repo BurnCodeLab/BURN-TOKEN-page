@@ -30,9 +30,9 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     return;
   }
 
-  const burnAmount = 69420;
-  const burnAddress = "11111111111111111111111111111111";
-  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump";
+  const burnAmount = 1; // Burn 1 token for testing
+  const burnAddress = "11111111111111111111111111111111"; // Solana official burn address
+  const tokenMintAddress = "GACpABn18xqiSJbD9ZEyArJDT9RHRMUut5nK9Z9Spump"; // Updated token address
 
   const provider = window.solana;
   try {
@@ -43,6 +43,7 @@ document.getElementById("burnButton").addEventListener("click", async () => {
 
     const publicKey = provider.publicKey;
 
+    // Fetch token accounts for the given mint
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
       mint: new solanaWeb3.PublicKey(tokenMintAddress),
     });
@@ -54,6 +55,7 @@ document.getElementById("burnButton").addEventListener("click", async () => {
 
     const tokenAccount = tokenAccounts.value[0].pubkey;
 
+    // Create a transfer instruction to burn tokens
     const transaction = new solanaWeb3.Transaction().add(
       splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
@@ -65,6 +67,7 @@ document.getElementById("burnButton").addEventListener("click", async () => {
       )
     );
 
+    // Send transaction
     const { signature } = await provider.signAndSendTransaction(transaction);
     await connection.confirmTransaction(signature, "confirmed");
 
@@ -75,4 +78,3 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     alert(`Error during burn: ${error.message}`);
   }
 });
-

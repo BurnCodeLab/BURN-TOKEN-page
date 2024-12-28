@@ -31,56 +31,44 @@ body {
   }
 }
 
-/* Glowing Text */
-.glow-text {
-  text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500, 0 0 30px #FF4500;
+/* Glowing Headers */
+.glow-header {
+  text-shadow: 0 0 20px #FF4500, 0 0 40px #FF4500, 0 0 60px #FF4500;
+  font-size: 2em;
 }
 
-/* Hero Section */
-.hero {
-  padding: 100px 20px;
-  color: white;
-  text-align: center;
+/* Information Section */
+.scroll-section {
+  padding: 50px 20px;
+  background: #111;
 }
 
-.hero h1 {
-  font-size: 4em;
+.scroll-item {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  background: #222;
+  border: 2px solid #FF4500;
+  box-shadow: 0 0 10px #00FF00;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.hero .slogan {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+.scroll-item.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.hero .connect-button,
-.hero .burn-button {
-  margin-top: 20px;
-  padding: 15px 30px;
-  font-size: 1.2em;
-  background: linear-gradient(45deg, #FF4500, #FF5733);
-  border: 2px solid #00FF00;
-  color: white;
-  cursor: pointer;
-  text-transform: uppercase;
-  box-shadow: 0 0 20px #FF4500, inset 0 0 8px #00FF00;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+/* Glowing Border for Bottom Sections */
+.glowing-border {
+  border: 2px solid #FF4500;
+  box-shadow: 0 0 20px #FF4500, 0 0 40px #FF4500, 0 0 60px #FF4500;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.hero .connect-button:hover,
-.hero .burn-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px #FF4500, inset 0 0 12px #00FF00;
-}
-
-.hero .burn-button:disabled {
-  background: gray;
-  cursor: not-allowed;
-}
-
-.hero .wallet-info {
-  margin-top: 10px;
-  color: #FFD700;
-  font-size: 1em;
+.glowing-border:hover {
+  box-shadow: 0 0 40px #FF5733, 0 0 80px #FF5733, 0 0 120px #FF5733;
 }
 
 /* Footer */

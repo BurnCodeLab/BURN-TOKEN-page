@@ -9,40 +9,6 @@ body {
   text-align: center;
 }
 
-/* Wallet Connect Section */
-.wallet-connect {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  text-align: right;
-  color: white;
-  z-index: 2;
-}
-
-.wallet-connect .connect-button {
-  padding: 10px 20px;
-  font-size: 0.8em;
-  background: linear-gradient(45deg, #FF4500, #FF5733);
-  border: 2px solid #00FF00;
-  color: white;
-  cursor: pointer;
-  text-transform: uppercase;
-  box-shadow: 0 0 20px #FF4500, inset 0 0 8px #00FF00;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.wallet-connect .connect-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px #FF4500, inset 0 0 12px #00FF00;
-}
-
-.wallet-connect .wallet-info,
-.wallet-connect .wallet-balance {
-  margin: 5px 0;
-  font-size: 0.9em;
-  color: #FFD700;
-}
-
 /* Retro Animated Grid Background */
 .grid-background {
   position: fixed;
@@ -65,11 +31,40 @@ body {
   }
 }
 
+/* Wallet Connect Button */
+.connect-wallet {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #FF4500, #FF5733);
+  border: 2px solid #00FF00;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px #FF4500, inset 0 0 5px #00FF00;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.connect-wallet:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #FF4500, inset 0 0 10px #00FF00;
+}
+
+/* Glowing Text */
+.glow-text {
+  text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500, 0 0 30px #FF4500;
+}
+
 /* Hero Section */
 .hero {
   padding: 100px 20px;
   color: white;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {

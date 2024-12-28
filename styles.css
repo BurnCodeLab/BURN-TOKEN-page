@@ -19,7 +19,7 @@ body {
   background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
               repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
   animation: gridScroll 10s linear infinite;
-  z-index: -1;
+  z-index: -1; /* Ensure the grid is behind all content */
 }
 
 @keyframes gridScroll {
@@ -41,6 +41,8 @@ body {
   padding: 100px 20px;
   color: white;
   text-align: center;
+  position: relative; /* Ensures the hero section overlays the grid */
+  z-index: 1; /* Places the hero section above the grid */
 }
 
 .hero h1 {

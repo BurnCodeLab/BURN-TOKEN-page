@@ -12,6 +12,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.2.0/lib/index.iife.min.js"></script>
 </head>
 <body>
+  <!-- Wallet Connect -->
+  <div class="wallet-connect">
+    <button id="connectWalletButton" class="connect-button">Connect Wallet</button>
+    <p id="walletInfo" class="wallet-info">Wallet: Not Connected</p>
+    <p id="walletBalance" class="wallet-balance">Balance: 0 $BURN</p>
+  </div>
+
   <!-- Animated Background -->
   <div class="grid-background"></div>
 
@@ -20,7 +27,7 @@
     <h1 class="glow-text">$BURN TOKEN 🔥</h1>
     <p class="slogan glow-text">Let’s Burn This Token to the Ground</p>
     <p class="burn-instruction">Only burns of exactly <strong>69420 $BURN</strong> tokens will count.</p>
-    <button class="burn-button" id="burnButton">Burn Now</button>
+    <button class="burn-button" id="burnButton" disabled>Burn Now</button>
     <p class="burn-address">
       Burn Address: <span>11111111111111111111111111111111</span>
     </p>

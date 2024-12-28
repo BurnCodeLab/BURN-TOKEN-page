@@ -9,6 +9,40 @@ body {
   text-align: center;
 }
 
+/* Wallet Connect Section */
+.wallet-connect {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  text-align: right;
+  color: white;
+  z-index: 2;
+}
+
+.wallet-connect .connect-button {
+  padding: 10px 20px;
+  font-size: 0.8em;
+  background: linear-gradient(45deg, #FF4500, #FF5733);
+  border: 2px solid #00FF00;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px #FF4500, inset 0 0 8px #00FF00;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.wallet-connect .connect-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #FF4500, inset 0 0 12px #00FF00;
+}
+
+.wallet-connect .wallet-info,
+.wallet-connect .wallet-balance {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #FFD700;
+}
+
 /* Retro Animated Grid Background */
 .grid-background {
   position: fixed;
@@ -19,7 +53,7 @@ body {
   background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
               repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
   animation: gridScroll 10s linear infinite;
-  z-index: -1; /* Ensure the grid is behind all content */
+  z-index: -1;
 }
 
 @keyframes gridScroll {
@@ -31,18 +65,11 @@ body {
   }
 }
 
-/* Glowing Text */
-.glow-text {
-  text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500, 0 0 30px #FF4500;
-}
-
 /* Hero Section */
 .hero {
   padding: 100px 20px;
   color: white;
   text-align: center;
-  position: relative; /* Ensures the hero section overlays the grid */
-  z-index: 1; /* Places the hero section above the grid */
 }
 
 .hero h1 {

@@ -1,8 +1,8 @@
 // Phantom Wallet Burn Tool Integration
 document.getElementById("burnButton").addEventListener("click", async () => {
   const burnAmount = 69420; // Amount to burn
-  const burnAddress = "11111111111111111111111111111111"; // Solana burn address
-  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Your token mint address
+  const burnAddress = process.env.SOLANA_BURN_ADDRESS || "11111111111111111111111111111111"; // Solana burn address
+  const tokenMintAddress = process.env.TOKEN_MINT_ADDRESS || "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Your token mint address
 
   const provider = window.solana;
   if (!provider || !provider.isPhantom) {
@@ -68,6 +68,46 @@ document.getElementById("burnButton").addEventListener("click", async () => {
   } catch (error) {
     alert(`Error during burn: ${error.message}`);
     console.error("Burn Error:", error);
+  }
+});
+
+// Token Balance Display
+document.addEventListener("DOMContentLoaded", async () => {
+  const provider = window.solana;
+  if (!provider || !provider.isPhantom) {
+    alert("Phantom Wallet is not installed. Please install it to proceed.");
+    window.open("https://phantom.app/", "_blank");
+    return;
+  }
+
+  try {
+    await provider.connect();
+    const publicKey = provider.publicKey;
+
+    const connection = new solanaWeb3.Connection(
+      solanaWeb3.clusterApiUrl("mainnet-beta"),
+      "confirmed"
+    );
+
+    const tokenMintAddress = process.env.TOKEN_MINT_ADDRESS || "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump";
+
+    const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
+      mint: new solanaWeb3.PublicKey(tokenMintAddress),
+    });
+
+    if (tokenAccounts.value.length === 0) {
+      alert("No token account found for the specified SPL token. Ensure you hold the required tokens.");
+      return;
+    }
+
+    const tokenAccount = tokenAccounts.value[0].pubkey;
+    const balanceResponse = await connection.getTokenAccountBalance(tokenAccount);
+    const tokenBalance = parseInt(balanceResponse.value.amount);
+
+    document.getElementById("tokenBalance").innerText = `Token Balance: ${tokenBalance}`;
+  } catch (error) {
+    alert(`Error fetching token balance: ${error.message}`);
+    console.error("Token Balance Error:", error);
   }
 });
 

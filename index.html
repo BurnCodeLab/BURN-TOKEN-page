@@ -23,11 +23,15 @@
     <h1 class="glow-text">$BURN TOKEN 🔥</h1>
     <p class="slogan glow-text">Let’s Burn This Token to the Ground</p>
     <p class="burn-instruction">Only burns of exactly <strong>69420 $BURN</strong> tokens will count.</p>
-    <button class="burn-button" id="burnButton">Burn Now</button>
+    <button class="burn-button" id="connectWalletButton" aria-label="Connect Phantom Wallet">Connect Wallet</button>
+    <button class="burn-button" id="burnButton" aria-label="Burn Tokens">Burn Now</button>
     <p class="burn-address">
       Burn Address: <span>11111111111111111111111111111111</span>
     </p>
   </header>
+
+  <!-- Canvas Section for Wallet and Burn Updates -->
+  <canvas id="burnCanvas" width="800" height="200"></canvas>
 
   <!-- Information Section -->
   <main class="scroll-section">

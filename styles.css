@@ -19,7 +19,7 @@ body {
   background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
               repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
   animation: gridScroll 10s linear infinite;
-  z-index: -1; /* Ensure the grid is behind all content */
+  z-index: -1;
 }
 
 @keyframes gridScroll {
@@ -41,8 +41,8 @@ body {
   padding: 100px 20px;
   color: white;
   text-align: center;
-  position: relative; /* Ensures the hero section overlays the grid */
-  z-index: 1; /* Places the hero section above the grid */
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -76,6 +76,14 @@ body {
   margin-top: 20px;
   font-size: 1em;
   color: #FF4500;
+}
+
+/* Canvas Styling */
+#burnCanvas {
+  margin: 20px auto;
+  display: block;
+  border: 2px solid #FF4500;
+  background-color: #000;
 }
 
 /* Scrolling Section */

@@ -2,7 +2,7 @@
 document.getElementById("burnButton").addEventListener("click", async () => {
   const burnAmount = 69420; // Amount to burn
   const burnAddress = "11111111111111111111111111111111"; // Solana burn address
-  const tokenMintAddress = "GACpABn18xqiSJbD9ZEyArJDT9RHRMUut5nK9Z9Spump"; // Your token mint address
+  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Your token mint address
 
   const provider = window.solana;
   if (!provider || !provider.isPhantom) {

@@ -77,7 +77,7 @@
       }
 
       try {
-        await provider.connect();
+        const result = await provider.connect({ onlyIfTrusted: false });
         const publicKey = provider.publicKey;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -1,8 +1,17 @@
 // Phantom Wallet Burn Tool Integration
 document.getElementById("burnButton").addEventListener("click", async () => {
   const burnAmount = 69420; // Amount to burn
-  const burnAddress = process.env.SOLANA_BURN_ADDRESS || "11111111111111111111111111111111"; // Solana burn address
-  const tokenMintAddress = process.env.TOKEN_MINT_ADDRESS || "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Your token mint address
+  const burnAddress = "11111111111111111111111111111111"; // Solana burn address
+  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Correct token mint address
+
+  // Ensure solanaWeb3 is properly loaded
+  const solanaWeb3 = window.solanaWeb3 || solanaWeb3;
+
+  if (!solanaWeb3) {
+    console.error("Solana Web3 library is not loaded. Check your <script> import.");
+    alert("Solana Web3 library is not loaded. Please try again later.");
+    return;
+  }
 
   const provider = window.solana;
   if (!provider || !provider.isPhantom) {
@@ -12,19 +21,23 @@ document.getElementById("burnButton").addEventListener("click", async () => {
   }
 
   try {
+    // Connect to Phantom Wallet
     await provider.connect();
     const publicKey = provider.publicKey;
 
+    // Confirm burn action
     const confirmation = confirm(
-      `You are about to burn ${burnAmount} tokens to the Solana burn address. Do you wish to proceed?`
+      `You are about to burn ${burnAmount} tokens of 9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump to the burn address. Do you wish to proceed?`
     );
     if (!confirmation) return;
 
+    // Establish connection to Solana blockchain
     const connection = new solanaWeb3.Connection(
       solanaWeb3.clusterApiUrl("mainnet-beta"),
       "confirmed"
     );
 
+    // Fetch user's token accounts for the specified mint
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
       mint: new solanaWeb3.PublicKey(tokenMintAddress),
     });
@@ -35,6 +48,8 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     }
 
     const tokenAccount = tokenAccounts.value[0].pubkey;
+
+    // Verify user's token balance
     const balanceResponse = await connection.getTokenAccountBalance(tokenAccount);
     const tokenBalance = parseInt(balanceResponse.value.amount);
 
@@ -43,6 +58,7 @@ document.getElementById("burnButton").addEventListener("click", async () => {
       return;
     }
 
+    // Create a transaction to transfer tokens to the burn address
     const transaction = new solanaWeb3.Transaction().add(
       splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
@@ -54,9 +70,11 @@ document.getElementById("burnButton").addEventListener("click", async () => {
       )
     );
 
+    // Sign and send the transaction
     const { signature } = await provider.signAndSendTransaction(transaction);
     alert(`Transaction sent! Signature: ${signature}`);
 
+    // Confirm the transaction
     const confirmationStatus = await connection.confirmTransaction(signature, "confirmed");
 
     if (confirmationStatus.value.err) {
@@ -68,46 +86,6 @@ document.getElementById("burnButton").addEventListener("click", async () => {
   } catch (error) {
     alert(`Error during burn: ${error.message}`);
     console.error("Burn Error:", error);
-  }
-});
-
-// Token Balance Display
-document.addEventListener("DOMContentLoaded", async () => {
-  const provider = window.solana;
-  if (!provider || !provider.isPhantom) {
-    alert("Phantom Wallet is not installed. Please install it to proceed.");
-    window.open("https://phantom.app/", "_blank");
-    return;
-  }
-
-  try {
-    await provider.connect();
-    const publicKey = provider.publicKey;
-
-    const connection = new solanaWeb3.Connection(
-      solanaWeb3.clusterApiUrl("mainnet-beta"),
-      "confirmed"
-    );
-
-    const tokenMintAddress = process.env.TOKEN_MINT_ADDRESS || "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump";
-
-    const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
-      mint: new solanaWeb3.PublicKey(tokenMintAddress),
-    });
-
-    if (tokenAccounts.value.length === 0) {
-      alert("No token account found for the specified SPL token. Ensure you hold the required tokens.");
-      return;
-    }
-
-    const tokenAccount = tokenAccounts.value[0].pubkey;
-    const balanceResponse = await connection.getTokenAccountBalance(tokenAccount);
-    const tokenBalance = parseInt(balanceResponse.value.amount);
-
-    document.getElementById("tokenBalance").innerText = `Token Balance: ${tokenBalance}`;
-  } catch (error) {
-    alert(`Error fetching token balance: ${error.message}`);
-    console.error("Token Balance Error:", error);
   }
 });
 

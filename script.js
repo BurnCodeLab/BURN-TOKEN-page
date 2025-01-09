@@ -1,7 +1,9 @@
-const canvas = document.getElementById("burnCanvas");
-const ctx = canvas.getContext("2d");
 
-async function connectWallet() {
+document.getElementById("burnButton").addEventListener("click", async () => {
+  const burnAmount = 69420; // Amount of tokens to burn
+  const burnAddress = "11111111111111111111111111111111"; // Solana burn address
+  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Your specific token mint address
+
   const provider = window.solana;
 
   if (!provider || !provider.isPhantom) {
@@ -14,46 +16,18 @@ async function connectWallet() {
     await provider.connect();
     const publicKey = provider.publicKey;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#00FF00";
-    ctx.font = "16px Press Start 2P";
-    ctx.fillText(`Wallet Connected: ${publicKey.toString()}`, 10, 50);
+    const confirmation = confirm(
+      `You are about to burn ${burnAmount} tokens to the Solana burn address. Do you wish to proceed?`
+    );
 
-    return publicKey;
-  } catch (error) {
-    console.error("Wallet connection failed:", error);
-    alert("Wallet connection failed. Please try again.");
-  }
-}
-
-async function burnTokens() {
-  const burnAmount = 69420;
-  const burnAddress = "11111111111111111111111111111111";
-  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump";
-
-  const solanaWeb3 = window.solanaWeb3 || solanaWeb3;
-
-  if (!solanaWeb3) {
-    alert("Solana Web3 library is not loaded. Please try again later.");
-    return;
-  }
-
-  const provider = window.solana;
-  if (!provider || !provider.isPhantom) {
-    alert("Phantom Wallet is not installed. Please install it to proceed.");
-    window.open("https://phantom.app/", "_blank");
-    return;
-  }
-
-  try {
-    await provider.connect();
-    const publicKey = provider.publicKey;
-
-    const confirmation = confirm(`You are about to burn ${burnAmount} tokens to the burn address. Do you wish to proceed?`);
     if (!confirmation) return;
 
-    const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl("mainnet-beta"), "confirmed");
+    const connection = new solanaWeb3.Connection(
+      solanaWeb3.clusterApiUrl("mainnet-beta"),
+      "confirmed"
+    );
 
+    // Fetch token accounts by owner
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
       mint: new solanaWeb3.PublicKey(tokenMintAddress),
     });
@@ -72,6 +46,7 @@ async function burnTokens() {
       return;
     }
 
+    // Create a burn transaction
     const transaction = new solanaWeb3.Transaction().add(
       splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
@@ -93,15 +68,9 @@ async function burnTokens() {
     }
 
     alert(`Transaction successful! Signature: ${signature}`);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#FF4500";
-    ctx.fillText("Burn Successful!", 10, 50);
     console.log(`Transaction Signature: ${signature}`);
   } catch (error) {
     alert(`Error during burn: ${error.message}`);
     console.error("Burn Error:", error);
   }
-}
-
-document.getElementById("connectWalletButton").addEventListener("click", connectWallet);
-document.getElementById("burnButton").addEventListener("click", burnTokens);
+});

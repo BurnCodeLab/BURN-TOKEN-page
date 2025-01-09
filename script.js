@@ -1,18 +1,9 @@
-<<<<<<< HEAD
 // Phantom Wallet Burn Tool Integration
-document.getElementById("burnButton").addEventListener("click", async () => {
-  const burnAmount = 69420; // Amount to burn
-  const burnAddress = "11111111111111111111111111111111"; // Solana burn address
-  const tokenMintAddress = "GACpABn18xqiSJbD9ZEyArJDT9RHRMUut5nK9Z9Spump"; // Your token mint address
-
-=======
-
 document.getElementById("burnButton").addEventListener("click", async () => {
   const burnAmount = 69420; // Amount of tokens to burn
   const burnAddress = "11111111111111111111111111111111"; // Solana burn address
-  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Your specific token mint address
+  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump"; // Token mint address
 
->>>>>>> 9f6ce859059a6f5675ed30450db94d71334059ef
   const provider = window.solana;
   if (!provider || !provider.isPhantom) {
     alert("Phantom Wallet is not installed. Please install it to proceed.");
@@ -27,23 +18,15 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     const confirmation = confirm(
       `You are about to burn ${burnAmount} tokens to the Solana burn address. Do you wish to proceed?`
     );
-<<<<<<< HEAD
-    if (!confirmation) return;
-
-=======
 
     if (!confirmation) return;
 
->>>>>>> 9f6ce859059a6f5675ed30450db94d71334059ef
     const connection = new solanaWeb3.Connection(
       solanaWeb3.clusterApiUrl("mainnet-beta"),
       "confirmed"
     );
 
-<<<<<<< HEAD
-=======
     // Fetch token accounts by owner
->>>>>>> 9f6ce859059a6f5675ed30450db94d71334059ef
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
       mint: new solanaWeb3.PublicKey(tokenMintAddress),
     });
@@ -56,14 +39,6 @@ document.getElementById("burnButton").addEventListener("click", async () => {
     const tokenAccount = tokenAccounts.value[0].pubkey;
     const balanceResponse = await connection.getTokenAccountBalance(tokenAccount);
     const tokenBalance = parseInt(balanceResponse.value.amount);
-<<<<<<< HEAD
-
-    if (tokenBalance < burnAmount) {
-      alert(`Insufficient balance. You have ${tokenBalance} tokens, but ${burnAmount} are required.`);
-      return;
-    }
-=======
->>>>>>> 9f6ce859059a6f5675ed30450db94d71334059ef
 
     if (tokenBalance < burnAmount) {
       alert(`Insufficient balance. You have ${tokenBalance} tokens, but ${burnAmount} are required.`);

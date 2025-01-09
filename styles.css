@@ -41,13 +41,8 @@ body {
   padding: 100px 20px;
   color: white;
   text-align: center;
-<<<<<<< HEAD
   position: relative; /* Ensures the hero section overlays the grid */
   z-index: 1; /* Places the hero section above the grid */
-=======
-  position: relative;
-  z-index: 1;
->>>>>>> 9f6ce859059a6f5675ed30450db94d71334059ef
 }
 
 .hero h1 {
@@ -83,8 +78,6 @@ body {
   color: #FF4500;
 }
 
-<<<<<<< HEAD
-=======
 /* Canvas Styling */
 #burnCanvas {
   margin: 20px auto;
@@ -93,7 +86,6 @@ body {
   background-color: #000;
 }
 
->>>>>>> 9f6ce859059a6f5675ed30450db94d71334059ef
 /* Scrolling Section */
 .scroll-section {
   padding: 50px 20px;

@@ -7,13 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Include solana-web3.js -->
+  <!-- Include Solana Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.76.0/solana-web3.min.js"></script>
-
-  <!-- Include @solana/spl-token -->
   <script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.2.0/lib/index.iife.min.js"></script>
-
-  <script src="script.js" defer></script>
 </head>
 <body>
   <!-- Animated Background -->
@@ -24,12 +20,10 @@
     <h1 class="glow-text">$BURN TOKEN 🔥</h1>
     <p class="slogan glow-text">Let’s Burn This Token to the Ground</p>
     <p class="burn-instruction">Only burns of exactly <strong>69420 $BURN</strong> tokens will count.</p>
-    <button class="connect-button" id="connectButton">Connect Wallet</button>
-    <button class="burn-button" id="burnButton" disabled>Burn Now</button>
+    <button class="burn-button" id="burnButton">Burn Now</button>
     <p class="burn-address">
       Burn Address: <span>11111111111111111111111111111111</span>
     </p>
-    <p id="walletInfo" class="wallet-info">Wallet Status: Not Connected</p>
   </header>
 
   <!-- Information Section -->
@@ -61,5 +55,7 @@
     <p>&copy; 2024 $BURN Token Project | Powered by Solana</p>
     <p><a href="/terms">Terms & Conditions</a></p>
   </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

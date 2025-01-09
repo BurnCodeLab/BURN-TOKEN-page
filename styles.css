@@ -19,7 +19,7 @@ body {
   background: repeating-linear-gradient(to right, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px),
               repeating-linear-gradient(to bottom, #00FF00 0, #00FF00 1px, transparent 1px, transparent 20px);
   animation: gridScroll 10s linear infinite;
-  z-index: -1;
+  z-index: -1; /* Ensure the grid is behind all content */
 }
 
 @keyframes gridScroll {
@@ -41,6 +41,8 @@ body {
   padding: 100px 20px;
   color: white;
   text-align: center;
+  position: relative; /* Ensures the hero section overlays the grid */
+  z-index: 1; /* Places the hero section above the grid */
 }
 
 .hero h1 {
@@ -52,7 +54,6 @@ body {
   margin-bottom: 20px;
 }
 
-.hero .connect-button,
 .hero .burn-button {
   margin-top: 20px;
   padding: 15px 30px;
@@ -66,15 +67,9 @@ body {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.hero .connect-button:hover,
 .hero .burn-button:hover {
   transform: scale(1.1);
   box-shadow: 0 0 30px #FF4500, inset 0 0 12px #00FF00;
-}
-
-.hero .burn-button:disabled {
-  background: gray;
-  cursor: not-allowed;
 }
 
 .hero .burn-address {
@@ -83,10 +78,27 @@ body {
   color: #FF4500;
 }
 
-.hero .wallet-info {
-  margin-top: 10px;
-  color: #FFD700;
-  font-size: 1em;
+/* Scrolling Section */
+.scroll-section {
+  padding: 50px 20px;
+  background: #111;
+}
+
+.scroll-item {
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 800px;
+  background: #222;
+  border: 2px solid #FF4500;
+  box-shadow: 0 0 10px #00FF00;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-item.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Footer */

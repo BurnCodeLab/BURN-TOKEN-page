@@ -24,14 +24,14 @@ const connectWallet = async () => {
 // Burn Functionality
 const burnTokens = async (walletPublicKey, burnAmount, burnAddress, tokenMintAddress) => {
   try {
-    const connection = new solanaWeb3.Connection(
-      solanaWeb3.clusterApiUrl("mainnet-beta"),
+    const connection = new window.solanaWeb3.Connection(
+      window.solanaWeb3.clusterApiUrl("mainnet-beta"),
       "confirmed"
     );
 
     const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-      new solanaWeb3.PublicKey(walletPublicKey),
-      { mint: new solanaWeb3.PublicKey(tokenMintAddress) }
+      new window.solanaWeb3.PublicKey(walletPublicKey),
+      { mint: new window.solanaWeb3.PublicKey(tokenMintAddress) }
     );
 
     if (tokenAccounts.value.length === 0) {
@@ -48,12 +48,12 @@ const burnTokens = async (walletPublicKey, burnAmount, burnAddress, tokenMintAdd
       return;
     }
 
-    const transaction = new solanaWeb3.Transaction().add(
+    const transaction = new window.solanaWeb3.Transaction().add(
       splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
         tokenAccount,
-        new solanaWeb3.PublicKey(burnAddress),
-        new solanaWeb3.PublicKey(walletPublicKey),
+        new window.solanaWeb3.PublicKey(burnAddress),
+        new window.solanaWeb3.PublicKey(walletPublicKey),
         [],
         burnAmount
       )

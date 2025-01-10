@@ -1,4 +1,4 @@
-// Style.js
+// styles.js
 
 // Apply glowing effect to text elements
 const applyGlowEffect = () => {

@@ -1,11 +1,28 @@
 {
+  "name": "solana-burn-tool",
+  "version": "1.0.0",
+  "description": "A tool to interact with the Solana blockchain for token burns.",
+  "main": "index.js",
   "dependencies": {
     "@solana/spl-token": "^0.4.9",
-    "@solana/web3.js": "^1.98.0"
+    "@solana/web3.js": "^1.98.0",
+    "dotenv": "^16.0.3",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "chai": "^5.1.2",
     "mocha": "^11.0.1",
-    "sinon": "^19.0.2"
-  }
+    "sinon": "^19.0.2",
+    "eslint": "^8.48.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "author": "Your Name",
+  "license": "MIT"
 }

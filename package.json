@@ -4,7 +4,7 @@
   "description": "A Solana-based token burn web application with Phantom Wallet integration.",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server",
+    "start": "npx lite-server",
     "deploy": "gh-pages -d ."
   },
   "dependencies": {
@@ -18,7 +18,7 @@
     "mocha": "^11.0.1",
     "sinon": "^19.0.2"
   },
-  "homepage": "https://burncodelab.github.io/BURN-TOKEN-page>",
+  "homepage": "https://<your-username>.github.io/<your-repository-name>",
   "author": "Your Name",
   "license": "MIT"
 }

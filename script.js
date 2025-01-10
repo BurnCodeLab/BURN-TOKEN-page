@@ -21,55 +21,37 @@ const connectWallet = async () => {
   }
 };
 
-// Burn Functionality
-const burnTokens = async (walletPublicKey, burnAmount, burnAddress, tokenMintAddress) => {
-  try {
-    const connection = new window.solanaWeb3.Connection(
-      window.solanaWeb3.clusterApiUrl("mainnet-beta"),
-      "confirmed"
-    );
+// Redirect to Phantom Token Page
+const openPhantomTokenPage = () => {
+  const tokenUrl =
+    "https://phantom.app/tokens/solana/9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump?referralId=lwdt8z4n45c";
+  window.open(tokenUrl, "_blank");
+};
 
-    const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-      new window.solanaWeb3.PublicKey(walletPublicKey),
-      { mint: new window.solanaWeb3.PublicKey(tokenMintAddress) }
-    );
+// Burn Setup Instructions
+const setupBurn = async () => {
+  const burnAmount = 69420;
+  const burnAddress = "11111111111111111111111111111111";
 
-    if (tokenAccounts.value.length === 0) {
-      alert("No token account found for the specified SPL token. Ensure you hold the required tokens.");
-      return;
-    }
-
-    const tokenAccount = tokenAccounts.value[0].pubkey;
-    const balanceResponse = await connection.getTokenAccountBalance(tokenAccount);
-    const tokenBalance = parseInt(balanceResponse.value.amount);
-
-    if (tokenBalance < burnAmount) {
-      alert(`Insufficient balance. You have ${tokenBalance} tokens, but ${burnAmount} are required.`);
-      return;
-    }
-
-    const transaction = new window.solanaWeb3.Transaction().add(
-      splToken.Token.createTransferInstruction(
-        splToken.TOKEN_PROGRAM_ID,
-        tokenAccount,
-        new window.solanaWeb3.PublicKey(burnAddress),
-        new window.solanaWeb3.PublicKey(walletPublicKey),
-        [],
-        burnAmount
-      )
-    );
-
-    const provider = window.solana;
-    const signedTransaction = await provider.signTransaction(transaction);
-    const signature = await connection.sendRawTransaction(signedTransaction.serialize());
-    await connection.confirmTransaction(signature, "confirmed");
-
-    alert(`Successfully burned ${burnAmount} tokens. Transaction Signature: ${signature}`);
-    return signature;
-  } catch (error) {
-    console.error("Burn Error:", error);
-    alert(`Error during burn: ${error.message}`);
+  const walletPublicKey = window.solana?.publicKey?.toString();
+  if (!walletPublicKey) {
+    alert("Please connect your wallet first.");
+    return;
   }
+
+  const confirmation = confirm(
+    `You are about to open Phantom Wallet to manually burn ${burnAmount} tokens to the burn address: ${burnAddress}. Do you wish to proceed?`
+  );
+
+  if (!confirmation) return;
+
+  // Open Phantom Token Page
+  openPhantomTokenPage();
+
+  // Provide Burn Address Instructions
+  alert(
+    `To complete the burn:\n1. Send exactly ${burnAmount} tokens.\n2. Use the following burn address:\n\n${burnAddress}`
+  );
 };
 
 // Event Listeners
@@ -80,22 +62,4 @@ document.getElementById("connectWallet").addEventListener("click", async () => {
   }
 });
 
-document.getElementById("burnButton").addEventListener("click", async () => {
-  const burnAmount = 69420;
-  const burnAddress = "11111111111111111111111111111111";
-  const tokenMintAddress = "9nGmUbhs1dh1wSgpwo6V25t4J3nmhYPMhAHmjmxZpump";
-
-  const walletPublicKey = window.solana?.publicKey?.toString();
-  if (!walletPublicKey) {
-    alert("Please connect your wallet first.");
-    return;
-  }
-
-  const confirmation = confirm(
-    `You are about to burn ${burnAmount} tokens to the Solana burn address. Do you wish to proceed?`
-  );
-
-  if (!confirmation) return;
-
-  await burnTokens(walletPublicKey, burnAmount, burnAddress, tokenMintAddress);
-});
+document.getElementById("burnButton").addEventListener("click", setupBurn);

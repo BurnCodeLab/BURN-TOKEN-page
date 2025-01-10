@@ -10,6 +10,9 @@
   <!-- Include Solana Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.76.0/solana-web3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.2.0/lib/index.iife.min.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='20' font-size='24'>🔥</text></svg>" type="image/svg+xml">
 </head>
 <body>
   <!-- Animated Background -->
@@ -21,6 +24,7 @@
     <p class="slogan glow-text">Let’s Burn This Token to the Ground</p>
     <p class="burn-instruction">Only burns of exactly <strong>69420 $BURN</strong> tokens will count.</p>
     <button class="burn-button" id="burnButton">Burn Now</button>
+    <button id="connectWallet">Connect Wallet</button>
     <p class="burn-address">
       Burn Address: <span>11111111111111111111111111111111</span>
     </p>
@@ -56,6 +60,7 @@
     <p><a href="/terms">Terms & Conditions</a></p>
   </footer>
 
-  <script src="script.js" defer></script>
+  <!-- Include Burn Script -->
+  <script src="solanaBurn.js" defer></script>
 </body>
 </html>

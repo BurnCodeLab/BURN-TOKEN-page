@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>$BURN Token 🔥</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 
-  <!-- Include Solana Dependencies -->
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Solana Dependencies -->
+  <!-- Make sure these match the versions your script.js expects -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.76.0/solana-web3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.2.0/lib/index.iife.min.js"></script>
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='20' font-size='24'>🔥</text></svg>" type="image/svg+xml">
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='20' font-size='24'>🔥</text></svg>"
+    type="image/svg+xml"
+  />
 </head>
 <body>
   <!-- Animated Background -->
@@ -22,12 +34,12 @@
   <header class="hero">
     <h1 class="glow-text">$BURN TOKEN 🔥</h1>
     <p class="slogan glow-text">Let’s Burn This Token to the Ground</p>
-    <p class="burn-instruction">Only burns of exactly <strong>69420 $BURN</strong> tokens will count.</p>
-    <button class="burn-button" id="burnButton">Burn 69420 Tokens via Phantom</button>
-    <button id="connectWallet">Connect Phantom Wallet</button>
-    <p class="burn-address">
-      Burn Address: <span>11111111111111111111111111111111</span>
+    <p class="burn-instruction">
+      Only burns of exactly <strong>69,420 $BURN</strong> tokens will count.
     </p>
+    <!-- Buttons that call the functions in script.js -->
+    <button class="burn-button" id="burnButton">Burn 69,420 Tokens via Phantom</button>
+    <button id="connectWallet">Connect Phantom Wallet</button>
   </header>
 
   <!-- Information Section -->
@@ -38,7 +50,7 @@
     </section>
     <section class="scroll-item">
       <h2>Burn Mechanism</h2>
-      <p>Each transaction must burn exactly <strong>69420 $BURN tokens</strong>. Incorrect amounts won’t count.</p>
+      <p>Each transaction must burn exactly <strong>69,420 $BURN tokens</strong>. Incorrect amounts won't count.</p>
     </section>
     <section class="scroll-item">
       <h2>Locked Liquidity 🔒</h2>
@@ -60,9 +72,9 @@
     <p><a href="/terms">Terms & Conditions</a></p>
   </footer>
 
-  <!-- Wallet and Burn Tool Integration -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.76.0/solana-web3.min.js"></script>
+  <!-- Include your updated script.js with the on-chain burn logic -->
   <script src="./script.js" defer></script>
+  <!-- Include other scripts if needed (e.g., for styling or animations) -->
   <script src="styles.js" defer></script>
 </body>
 </html>

@@ -14,8 +14,7 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Solana Dependencies -->
-  <!-- Make sure these match the versions your script.js expects -->
+  <!-- For Phantom + SPL Token in-browser usage -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.76.0/solana-web3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.2.0/lib/index.iife.min.js"></script>
 
@@ -37,9 +36,14 @@
     <p class="burn-instruction">
       Only burns of exactly <strong>69,420 $BURN</strong> tokens will count.
     </p>
-    <!-- Buttons that call the functions in script.js -->
-    <button class="burn-button" id="burnButton">Burn 69,420 Tokens via Phantom</button>
-    <button id="connectWallet">Connect Phantom Wallet</button>
+
+    <!-- Buttons that trigger our Phantom-based burn -->
+    <button class="burn-button" id="burnButton">
+      Burn 69,420 Tokens via Phantom
+    </button>
+    <button id="connectWallet">
+      Connect Phantom Wallet
+    </button>
   </header>
 
   <!-- Information Section -->
@@ -72,9 +76,9 @@
     <p><a href="/terms">Terms & Conditions</a></p>
   </footer>
 
-  <!-- Include your updated script.js with the on-chain burn logic -->
+  <!-- This script references your Phantom-based burn logic (similar to QuickNode instructions) -->
   <script src="./script.js" defer></script>
-  <!-- Include other scripts if needed (e.g., for styling or animations) -->
+  <!-- If you have any other JavaScript for styling or animations, include it here -->
   <script src="styles.js" defer></script>
 </body>
 </html>

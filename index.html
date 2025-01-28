@@ -2,174 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Burn 25 SPL Tokens</title>
-  <style>
-    body {
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      background: linear-gradient(120deg, #ffa751, #ffe259);
-      margin: 0; 
-      padding: 2rem; 
-      text-align: center;
-    }
-    h1 {
-      color: #444;
-      margin-bottom: 0.5rem;
-    }
-    #connectWalletBtn, #burnBtn {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      color: #fff;
-      background-color: #ff4a4a;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin: 0.5rem;
-      transition: 0.3s;
-    }
-    #connectWalletBtn:hover, #burnBtn:hover {
-      background-color: #ff6666;
-    }
-    #statusMsg {
-      margin-top: 1rem; 
-      font-weight: bold;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #fff5e6;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .token-info {
-      margin: 1rem 0;
-      font-size: 1.1rem;
-      background: #fff0cc;
-      padding: 1rem;
-      border-radius: 8px;
-      display: inline-block;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Burn Tokens</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Burn 25 SPL Tokens</h1>
+    <h1 class="title">🔥 Retro Token Burner</h1>
     <p class="token-info">
       Mint Address: <strong>TXyF5bNEcYdTBgybocXYTVWkQi4s5CSStVMV25epump</strong>
     </p>
-    <p>
-      Connect your Phantom wallet, then click "Burn 25 Tokens" to burn <br>
-      exactly <strong>25 tokens</strong> from your balance (6 decimals).
-    </p>
-
-    <!-- Connect wallet button -->
-    <button id="connectWalletBtn">Connect Phantom</button>
-
-    <!-- Burn tokens button -->
-    <button id="burnBtn" style="display: none;">Burn 25 Tokens</button>
-
-    <div id="statusMsg"></div>
+    <p>Connect your wallet and burn <strong>25 tokens</strong> to save the galaxy!</p>
+    <button id="connectWalletBtn" class="button">Connect Wallet 🎮</button>
+    <button id="burnBtn" class="button hidden">Burn Tokens 🔥</button>
+    <div id="statusMsg" class="status"></div>
   </div>
 
-  <!-- Include Solana libraries from unpkg -->
-  <script src="https://unpkg.com/@solana/web3.js@1.76.0/lib/index.iife.js"></script>
-  <script src="https://unpkg.com/@solana/spl-token@0.3.5/dist/index.iife.js"></script>
-  <script>
-    // Aliases for convenience
-    const { Connection, PublicKey, Transaction } = solanaWeb3;
-    const { getOrCreateAssociatedTokenAccount, createBurnInstruction } = splToken;
-
-    // Your SPL token's mint address (6 decimals)
-    const MINT_ADDRESS = "TXyF5bNEcYdTBgybocXYTVWkQi4s5CSStVMV25epump";
-
-    // If token has 6 decimals, then 25 tokens => 25 * 10^6 raw units
-    const DECIMALS = 6;
-    const BURN_QUANTITY = 25 * (10 ** DECIMALS);
-
-    // Phantom provider
-    let provider = null;
-
-    // DOM Elements
-    const connectWalletBtn = document.getElementById("connectWalletBtn");
-    const burnBtn = document.getElementById("burnBtn");
-    const statusMsg = document.getElementById("statusMsg");
-
-    // Check for Phantom on window load
-    window.addEventListener('load', () => {
-      if ('solana' in window) {
-        provider = window.solana;
-        if (provider.isPhantom) {
-          console.log("Phantom wallet found!");
-        } else {
-          alert("Phantom wallet not found! Please install from https://phantom.app");
-        }
-      } else {
-        alert("No Solana provider found! Install Phantom or another Solana wallet extension.");
-      }
-    });
-
-    // Connect Phantom wallet
-    connectWalletBtn.addEventListener('click', async () => {
-      try {
-        if (!provider) {
-          throw new Error("Phantom wallet is not available.");
-        }
-        await provider.connect();
-        console.log("Wallet connected:", provider.publicKey.toString());
-
-        // Show the Burn button once wallet is connected
-        burnBtn.style.display = "inline-block";
-        statusMsg.textContent = "Wallet connected: " + provider.publicKey.toString();
-      } catch (err) {
-        console.error(err);
-        statusMsg.textContent = "Connection error: " + err.message;
-      }
-    });
-
-    // Burn 25 tokens
-    burnBtn.addEventListener('click', async () => {
-      try {
-        // Clear old statuses
-        statusMsg.textContent = "";
-
-        if (!provider || !provider.publicKey) {
-          throw new Error("Wallet not connected!");
-        }
-
-        // Connect to Solana mainnet
-        const connection = new Connection("https://api.mainnet-beta.solana.com");
-        const mintPubkey = new PublicKey(MINT_ADDRESS);
-
-        // Get or create associated token account for the user
-        const fromWalletPubkey = provider.publicKey;
-        const tokenAccount = await getOrCreateAssociatedTokenAccount(
-          connection,
-          provider,       // payer
-          mintPubkey,
-          fromWalletPubkey
-        );
-
-        // Build burn instruction
-        const transaction = new Transaction().add(
-          createBurnInstruction(
-            tokenAccount.address, // token account
-            mintPubkey,           // mint
-            fromWalletPubkey,     // burn authority
-            BURN_QUANTITY
-          )
-        );
-
-        // Sign & send via Phantom
-        const { signature } = await provider.signAndSendTransaction(transaction);
-        statusMsg.textContent = "Burn transaction sent! Signature: " + signature;
-        console.log("Burn Transaction Signature:", signature);
-
-      } catch (err) {
-        console.error(err);
-        statusMsg.textContent = "Burn error: " + err.message;
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
